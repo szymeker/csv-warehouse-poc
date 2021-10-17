@@ -12,7 +12,7 @@ Build application:
 mvn clean install
 ```
 
-Build image:l
+Build image:
 ```
 docker build -t csvwarehouse .
 ```
@@ -26,17 +26,17 @@ docker run -d -p 8080:8080 csvwarehouse
 ### Loading data
 
 #### Parameters
-| Parameter         | Type         | Description                                            | Example value               |
-|-------------------|--------------|--------------------------------------------------------|-----------------------------|
-| fileUrl           | String       | CSV file to be loaded                                  | http://example.com/file.csv |
-| timeColumn        | String       | Time column name                                       | Daily                       |
-| timeFormat        | String       | Time column datetime format                            | M/d/yy                      |
-| dimensionColumns  | List<String> | List of columns to be used as dimensions               | Datasource,Campaign         |
-| metricColumns     | List<String> | List of columns to be used as metrics                  | Impressions,Clicks          |
-| metricColumnTypes | List<String> | Types of metric column, 1:1 with `metricColumns` param | LONG,LONG                   |
+| Parameter         | Type         | Description                                            | Example value                 |
+|-------------------|--------------|--------------------------------------------------------|-------------------------------|
+| fileUrl           | String       | CSV file to be loaded                                  | `http://example.com/file.csv` |
+| timeColumn        | String       | Time column name                                       | `Daily`                       |
+| timeFormat        | String       | Time column datetime format                            | `M/d/yy`                      |
+| dimensionColumns  | List<String> | List of columns to be used as dimensions               | `Datasource,Campaign`         |
+| metricColumns     | List<String> | List of columns to be used as metrics                  | `Impressions,Clicks`          |
+| metricColumnTypes | List<String> | Types of metric column, 1:1 with `metricColumns` param | `LONG,LONG`                   |
 
 #### Usage example
-Load data into application - send POST:
+Load data into application:
 ```
 curl --location --request POST 'http://localhost:8080/loadDataFile?fileUrl={YOUR_FILE_URL}&timeColumn=Daily&dimensionColumns=Datasource,Campaign&metricColumns=Impressions,Clicks&metricColumnTypes=LONG,LONG&timeFormat=M/d/yy'
 ```
@@ -49,14 +49,14 @@ Sample response:
 ### Querying data
 
 #### Parameters
-| Parameter     | Type          | Required | Description                                                             |                        |
-|---------------|---------------|----------|-------------------------------------------------------------------------|------------------------|
-| metrics       | Set<String>   | false    | Metric names to be present in the response                              | Clicks,Impressions,CTR |
-| filters       | List<String>  | false    | Filters with format: column1=value1,column2=value2                      | Datasource=Google Ads  |
-| startDateTime | ISO date time | false    | Time range start (inclusive)                                            | 2010-09-16T08:00:00    |
-| endDateTime   | ISO date time | false    | Time range end (exclusive)                                              | 2020-09-16T08:00:00    |
-| groupColumns  | Set<String>   | false    | Columns to group by your data                                           | Datasource             |
-| groupByTime   | Boolean       | false    | If true then specific time bucket will be created for each group column | false                  |
+| Parameter     | Type          | Required | Description                                                             |                          |
+|---------------|---------------|----------|-------------------------------------------------------------------------|--------------------------|
+| metrics       | Set<String>   | false    | Metric names to be present in the response                              | `Clicks,Impressions,CTR` |
+| filters       | List<String>  | false    | Filters with format: column1=value1,column2=value2                      | `Datasource=Google Ads`  |
+| startDateTime | ISO date time | false    | Time range start (inclusive)                                            | `2010-09-16T08:00:00`    |
+| endDateTime   | ISO date time | false    | Time range end (exclusive)                                              | `2020-09-16T08:00:00`    |
+| groupColumns  | Set<String>   | false    | Columns to group by your data                                           | `Datasource`             |
+| groupByTime   | Boolean       | false    | If true then specific time bucket will be created for each group column | `false`                  |
 
 ### Sample requests/response
 #### Total Clicks for a given Datasource for a given Date range
